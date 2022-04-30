@@ -27,7 +27,7 @@ Product.init(
       type: DataTypes.DECIMAL,
       allowNull: false,
       validate: {
-        //?
+        isDecimal: true
       }
     },
     //stock - int, not null, default 10, validates numeric
@@ -36,7 +36,7 @@ Product.init(
       allowNull: false,
       default: 10,
       validate: {
-        //?
+        isInt: true
       }
     },
     //category_id - int, ref category id
@@ -44,6 +44,14 @@ Product.init(
       type: DataTypes.INTEGER,
       references: {
         model: 'category',
+        key: 'id'
+      }
+    },
+    //tag_id - int, ref tag id
+    tag_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'tag',
         key: 'id'
       }
     }
