@@ -31,6 +31,9 @@ router.get('/:id', (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   Product.findOne({
+    where: {
+      id: req.params.id
+    },
     include: [
       {
         model: Category,
@@ -77,9 +80,8 @@ router.post('/', (req, res) => {
         });
         return ProductTag.bulkCreate(productTagIdArr);
       }
-      // if no product tags, just respond
-      res.status(200).json(product);
     })
+    .then((productData)=> res.status(200).json(productData))
     .then((productTagIds) => res.status(200).json(productTagIds))
     .catch((err) => {
       console.log(err);
