@@ -41,6 +41,7 @@ router.get('/:id', (req, res) => {
       },
       {
         model: Tag,
+        as: "tags",
         include: ['id', 'tag_name']
       }
     ]
