@@ -25,6 +25,9 @@ router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
   Tag.findOne({
+    where: {
+      id: req.params.id
+    },
     include: [
       {
         model: Product,
@@ -77,7 +80,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  // delete on tag by its `id` value
+  // delete a tag by its `id` value
   Tag.destroy({
     where: {
       id: req.params.id
@@ -85,10 +88,10 @@ router.delete('/:id', (req, res) => {
   })
     .then(dbTagData => {
       if (!dbTagData) {
-        res.status(404).json({ message: 'No post found with this id' });
+        res.status(404).json({ message: 'No tag found with this id!' });
         return;
       }
-      res.json(dbPostData);
+      res.json(dbTagData);
     })
     .catch(err => {
       console.log(err);
